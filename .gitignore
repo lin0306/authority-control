@@ -36,3 +36,4 @@ build/
 /mvnw.cmd
 /src/main/resources/application-*.yaml
 /target/
+/logs/
