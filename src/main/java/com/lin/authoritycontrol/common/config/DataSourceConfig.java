@@ -5,7 +5,6 @@ import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 
@@ -16,7 +15,6 @@ import javax.sql.DataSource;
  * @since 2024/12/25 下午8:35
  */
 @Configuration
-@EnableTransactionManagement
 public class DataSourceConfig {
 
     /**
@@ -25,7 +23,7 @@ public class DataSourceConfig {
     @Bean(name = "primaryDataSource")
     @Primary
     @ConfigurationProperties(prefix = "spring.datasource.primary")
-    public DataSource dataSource1() {
+    public DataSource primaryDataSource() {
         return DataSourceBuilder.create().build();
     }
 }

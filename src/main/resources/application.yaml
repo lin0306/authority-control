@@ -1,3 +1,5 @@
 spring:
   application:
     name: authority-control
+  profiles:
+    active: dev
