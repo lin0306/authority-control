@@ -1,5 +1,6 @@
 package com.lin.authoritycontrol.common.exception;
 
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -9,5 +10,14 @@ import lombok.extern.slf4j.Slf4j;
  * @since 2024/12/25 下午8:02
  */
 @Slf4j
-public class CustomException extends RuntimeException{
+@NoArgsConstructor
+public class CustomException extends RuntimeException {
+
+    public CustomException(String message) {
+        super(message);
+    }
+
+    public CustomException(String message, Throwable e) {
+        super(message, e);
+    }
 }

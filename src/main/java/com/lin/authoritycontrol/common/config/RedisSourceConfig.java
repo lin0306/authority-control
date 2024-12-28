@@ -43,21 +43,28 @@ public class RedisSourceConfig {
 
     // ============================= primary end ================================
 
-    // ============================= secondary start ================================
-
-
-    @Bean("secondaryLettuceConnectionFactory")
-    public LettuceConnectionFactory secondaryLettuceConnectionFactory(@Qualifier("secondaryRedisConfig") RedisStandaloneConfiguration secondaryRedisConfig) {
-        LettuceConnectionFactory factory = new LettuceConnectionFactory(secondaryRedisConfig);
-        factory.afterPropertiesSet();
-        return factory;
-    }
-
-
-    @Bean(name = "secondaryRedisTemplate")
-    public RedisTemplate<String, Object> secondaryRedisTemplate(@Qualifier("secondaryLettuceConnectionFactory") LettuceConnectionFactory secondaryLettuceConnectionFactory) {
-        return createRedisTemplate(secondaryLettuceConnectionFactory);
-    }
+//    // ============================= secondary start ================================
+//
+//    @Bean("secondaryLettuceConnectionFactory")
+//    public LettuceConnectionFactory secondaryLettuceConnectionFactory(@Qualifier("secondaryRedisConfig") RedisStandaloneConfiguration secondaryRedisConfig) {
+//        LettuceConnectionFactory factory = new LettuceConnectionFactory(secondaryRedisConfig);
+//        factory.afterPropertiesSet();
+//        return factory;
+//    }
+//
+//
+//    @Bean(name = "secondaryRedisTemplate")
+//    public RedisTemplate<String, Object> secondaryRedisTemplate(@Qualifier("secondaryLettuceConnectionFactory") LettuceConnectionFactory secondaryLettuceConnectionFactory) {
+//        return createRedisTemplate(secondaryLettuceConnectionFactory);
+//    }
+//
+//    @Bean("secondaryRedisConfig")
+//    @ConfigurationProperties(prefix = "spring.redis.secondary")
+//    public RedisStandaloneConfiguration secondaryRedisConfig() {
+//        return new RedisStandaloneConfiguration();
+//    }
+//
+//    // ============================= secondary end ================================
 
     private RedisTemplate<String, Object> createRedisTemplate(LettuceConnectionFactory connectionFactory) {
         RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
@@ -66,13 +73,4 @@ public class RedisSourceConfig {
         redisTemplate.setValueSerializer(new StringRedisSerializer());
         return redisTemplate;
     }
-
-    // ============================= secondary end ================================
-
-    @Bean("secondaryRedisConfig")
-    @ConfigurationProperties(prefix = "spring.redis.secondary")
-    public RedisStandaloneConfiguration secondaryRedisConfig() {
-        return new RedisStandaloneConfiguration();
-    }
-
 }

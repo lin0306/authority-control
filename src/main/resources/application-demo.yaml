@@ -1,10 +1,21 @@
 spring:
   datasource:
+    dynamic:
+      primary: primary
+      datasource:
+        primary:
+          type: com.alibaba.druid.pool.DruidDataSource
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url:
+          username:
+          password:
+  redis:
     primary:
-      driver-class-name:
-      url:
+      host: 127.0.0.1
+      port: 6379
       username:
       password:
+      database: 0
 
 # 雪花算法配置
 snowflake:
@@ -18,3 +29,6 @@ logging:
   # 设置 Spring Boot 根日志级别为 INFO
   level:
     root: INFO
+# AES秘钥存储路径
+aes:
+  keyPath:

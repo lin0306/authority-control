@@ -1,6 +1,7 @@
 package com.lin.authoritycontrol.common.config;
 
 import com.lin.authoritycontrol.common.base.Result;
+import com.lin.authoritycontrol.common.exception.CipherException;
 import com.lin.authoritycontrol.common.exception.CustomException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
@@ -73,5 +74,13 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public Result<Void> customException(Exception e) {
         return Result.failed(e.getMessage());
+    }
+
+    @ExceptionHandler(CipherException.class)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public Result<Void> cipherException(Exception e) {
+        log.error("数据加解密异常", e);
+        return Result.failed("数据加解密异常");
     }
 }
