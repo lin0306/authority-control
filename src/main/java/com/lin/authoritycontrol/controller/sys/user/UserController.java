@@ -41,7 +41,7 @@ public class UserController {
     @PutMapping("{userId}/profile")
     public Result<Void> updateUser(@RequestParam String userId, @Validated @RequestBody UserUpdateForm user) {
         user.setUserId(userId);
-
+        sysUserService.updateUser(user);
         return Result.success();
     }
 
