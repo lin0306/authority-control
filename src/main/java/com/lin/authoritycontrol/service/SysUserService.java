@@ -1,12 +1,12 @@
 package com.lin.authoritycontrol.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.lin.authoritycontrol.controller.sys.user.form.UserForm;
+import com.lin.authoritycontrol.common.base.PageVO;
+import com.lin.authoritycontrol.controller.sys.user.form.UserSaveForm;
+import com.lin.authoritycontrol.controller.sys.user.form.UserUpdateForm;
 import com.lin.authoritycontrol.controller.sys.user.query.UserQuery;
 import com.lin.authoritycontrol.controller.sys.user.vo.UserVO;
 import com.lin.authoritycontrol.mapper.domain.SysUser;
-
-import java.util.List;
 
 /**
  * 用户service
@@ -19,10 +19,30 @@ public interface SysUserService extends IService<SysUser> {
     /**
      * 添加用户
      */
-    void saveUser(UserForm user);
+    void saveUser(UserSaveForm user);
 
     /**
-     * 查询用户列表
+     * 修改用户
      */
-    List<UserVO> getUserList(UserQuery query);
+    void updateUser(UserUpdateForm user);
+
+    /**
+     * 修改密码
+     */
+    void updatePassword(String userId, String password);
+
+    /**
+     * 删除用户
+     */
+    void deleteUser(String userId);
+
+    /**
+     * 分页查询用户
+     */
+    PageVO<UserVO> queryUserPage(UserQuery query);
+
+    /**
+     * 查询用户详细信息
+     */
+    UserVO getUser(String userId);
 }

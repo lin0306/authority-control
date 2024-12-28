@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 /**
  * 用户角色
@@ -54,4 +53,9 @@ public class UserRole implements Serializable {
     private LocalDateTime createTime;
 
     private static final long serialVersionUID = 1L;
+
+    public UserRole(String userId, String roleId) {
+        this.userId = userId;
+        this.roleId = roleId;
+    }
 }

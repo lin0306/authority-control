@@ -1,10 +1,14 @@
 package com.lin.authoritycontrol.controller.sys.user.vo;
 
+import com.lin.authoritycontrol.controller.sys.role.vo.RoleVO;
 import com.lin.authoritycontrol.mapper.domain.SysUser;
+import com.lin.authoritycontrol.mapper.domain.UserProfile;
 import com.lin.authoritycontrol.util.AESUtil;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
+
+import java.util.List;
 
 /**
  * 用户vo
@@ -27,8 +31,48 @@ public class UserVO {
      */
     private String userName;
 
-    public UserVO(SysUser sysUserDO) {
-        this.uId = sysUserDO.getUId();
-        this.userName = AESUtil.decrypt(sysUserDO.getUserName());
+    /**
+     * 姓名
+     */
+    private String realName;
+
+    /**
+     * 性别 0-女，1-男
+     */
+    private Integer gender;
+
+    /**
+     * 性别
+     */
+    private Integer genderValue;
+
+    /**
+     * 身份卡
+     */
+    private String idCard;
+
+    /**
+     * 身份卡类型
+     */
+    private String idCardType;
+
+    /**
+     * 身份卡类型
+     */
+    private String idCardTypeValue;
+
+    /**
+     * 角色id列表
+     */
+    private List<RoleVO> roleIds;
+
+    public UserVO(SysUser sysUser, UserProfile profile, List<RoleVO> roleList) {
+        this.uId = sysUser.getUId();
+        this.userName = AESUtil.decrypt(sysUser.getUserName());
+        this.realName = profile.getRealName();
+        this.gender = profile.getGender();
+        this.idCard = AESUtil.decrypt(profile.getIdCard());
+        this.idCardType = profile.getIdCardType();
+        this.roleIds = roleList;
     }
 }

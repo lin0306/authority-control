@@ -1,33 +1,35 @@
-package com.lin.authoritycontrol.controller.sys.user.query;
+package com.lin.authoritycontrol.controller.sys.user.form;
 
-import com.lin.authoritycontrol.common.base.PageForm;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+import java.util.List;
+
 /**
- * 用户查询
+ * 用户信息表单
  *
  * @author 林维家
- * @since 2024/12/28 下午1:03
+ * @since 2024/12/28 下午12:48
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserQuery extends PageForm {
+public class UserUpdateForm implements Serializable {
 
     /**
-     * 用户名
+     * 用户id
      */
-    private String userName;
+    private String userId;
 
     /**
-     * 真实姓名
+     * 姓名
      */
     private String realName;
 
     /**
-     * 性别
+     * 性别 0-女，1-男
      */
     private Integer gender;
 
@@ -41,4 +43,8 @@ public class UserQuery extends PageForm {
      */
     private String idCardType;
 
+    /**
+     * 角色id列表
+     */
+    private List<String> roleIds;
 }

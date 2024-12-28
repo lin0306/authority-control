@@ -11,7 +11,7 @@
  Target Server Version : 90100 (9.1.0)
  File Encoding         : 65001
 
- Date: 28/12/2024 16:43:52
+ Date: 28/12/2024 18:49:57
 */
 
 SET NAMES utf8mb4;
@@ -106,7 +106,7 @@ CREATE TABLE `sys_role`  (
 DROP TABLE IF EXISTS `sys_user`;
 CREATE TABLE `sys_user`  (
   `u_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '唯一编码',
-  `user_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '用户名',
+  `user_name` blob NOT NULL COMMENT '用户名',
   `user_name_hash` blob NOT NULL COMMENT '用户名hash值，用于模糊搜索',
   `password` blob NULL COMMENT '密码',
   `creator_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '创建人id',
@@ -125,7 +125,8 @@ CREATE TABLE `user_profile`  (
   `u_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '用户id',
   `real_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '姓名',
   `gender` tinyint NULL DEFAULT NULL COMMENT '性别 0-女，1-男',
-  `id_card` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '身份卡',
+  `id_card` blob NULL COMMENT '身份卡',
+  `id_card_hash` blob NULL COMMENT '身份卡hash值',
   `id_card_type` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '身份卡类型',
   `creator_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '创建人id',
   `create_time` datetime NOT NULL COMMENT '创建时间',

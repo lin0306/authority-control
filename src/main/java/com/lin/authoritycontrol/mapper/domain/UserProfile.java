@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.lin.authoritycontrol.controller.sys.user.form.UserSaveForm;
+import com.lin.authoritycontrol.controller.sys.user.form.UserUpdateForm;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,7 +27,7 @@ public class UserProfile implements Serializable {
     /**
      * 用户id
      */
-    @TableId(value = "u_id", type = IdType.ASSIGN_UUID)
+    @TableId(value = "u_id", type = IdType.INPUT)
     private String uId;
 
     /**
@@ -45,6 +47,12 @@ public class UserProfile implements Serializable {
      */
     @TableField(value = "id_card")
     private String idCard;
+
+    /**
+     * 身份卡hash值，用于模糊查询
+     */
+    @TableField(value = "id_card_hash")
+    private String idCardHash;
 
     /**
      * 身份卡类型
@@ -83,4 +91,18 @@ public class UserProfile implements Serializable {
     private Boolean deleteFlag;
 
     private static final long serialVersionUID = 1L;
+
+    public UserProfile(String userId, UserSaveForm user) {
+        this.uId = userId;
+        this.realName = user.getRealName();
+        this.gender = user.getGender();
+        this.idCardType = user.getIdCardType();
+    }
+
+    public UserProfile(String userId, UserUpdateForm user) {
+        this.uId = userId;
+        this.realName = user.getRealName();
+        this.gender = user.getGender();
+        this.idCardType = user.getIdCardType();
+    }
 }
