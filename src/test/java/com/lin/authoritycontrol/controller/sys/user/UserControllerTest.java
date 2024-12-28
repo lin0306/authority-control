@@ -25,6 +25,7 @@ class UserControllerTest {
     private UserController userController;
 
     @Test
+//    @Transactional(rollbackFor = Exception.class)
     void test() {
         UserSaveForm form = new UserSaveForm();
         form.setUserName("lin");

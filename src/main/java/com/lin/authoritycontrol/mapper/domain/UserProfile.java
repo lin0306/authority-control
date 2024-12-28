@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.lin.authoritycontrol.common.enums.user.GenderEnum;
+import com.lin.authoritycontrol.common.enums.user.IdCardTypeEnum;
 import com.lin.authoritycontrol.controller.sys.user.form.UserSaveForm;
 import com.lin.authoritycontrol.controller.sys.user.form.UserUpdateForm;
 import lombok.AllArgsConstructor;
@@ -104,5 +106,14 @@ public class UserProfile implements Serializable {
         this.realName = user.getRealName();
         this.gender = user.getGender();
         this.idCardType = user.getIdCardType();
+    }
+
+    public String getGenderName() {
+        return GenderEnum.getByCode(this.gender).getName();
+    }
+
+    public String getIdCardTypeName() {
+        IdCardTypeEnum typeEnum = IdCardTypeEnum.getByCode(this.idCardType);
+        return typeEnum == null ? "" : typeEnum.getName();
     }
 }

@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 /**
  * 系统日志
@@ -32,7 +31,7 @@ public class SysLog implements Serializable {
     /**
      * 日志类型
      */
-    @TableField(value = "`type`")
+    @TableField(value = "type")
     private String type;
 
     /**

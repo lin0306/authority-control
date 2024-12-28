@@ -15,4 +15,17 @@
         ur.user_id = #{userId}
     ORDER BY r.create_time DESC
   </select>
+
+  <select id="getUserRoleList" resultType="com.lin.authoritycontrol.controller.sys.user.vo.UserRoleVO">
+    SELECT
+      ur.rel_id,
+      ur.role_id,
+      r.role_name
+    FROM
+      user_role ur
+      LEFT JOIN sys_role r on r.role_id = ur.role_id AND r.delete_flag = 0
+    WHERE
+        ur.user_id = #{userId}
+    ORDER BY r.create_time DESC
+  </select>
 </mapper>

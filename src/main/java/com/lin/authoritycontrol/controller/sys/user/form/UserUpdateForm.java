@@ -47,4 +47,5 @@ public class UserUpdateForm implements Serializable {
      * 角色id列表
      */
     private List<String> roleIds;
+
 }

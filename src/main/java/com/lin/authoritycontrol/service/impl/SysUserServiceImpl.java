@@ -4,6 +4,8 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lin.authoritycontrol.common.base.PageVO;
+import com.lin.authoritycontrol.common.enums.log.LogRelTypeEnum;
+import com.lin.authoritycontrol.common.enums.log.LogTypeEnum;
 import com.lin.authoritycontrol.common.exception.CustomException;
 import com.lin.authoritycontrol.controller.sys.role.vo.RoleVO;
 import com.lin.authoritycontrol.controller.sys.user.form.UserSaveForm;
@@ -13,6 +15,7 @@ import com.lin.authoritycontrol.controller.sys.user.vo.UserVO;
 import com.lin.authoritycontrol.mapper.SysUserMapper;
 import com.lin.authoritycontrol.mapper.domain.SysUser;
 import com.lin.authoritycontrol.mapper.domain.UserProfile;
+import com.lin.authoritycontrol.service.SysLogService;
 import com.lin.authoritycontrol.service.SysUserService;
 import com.lin.authoritycontrol.service.UserProfileService;
 import com.lin.authoritycontrol.service.UserRoleService;
@@ -43,6 +46,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     private final PasswordEncoder passwordEncoder;
     private final UserRoleService userRoleService;
     private final UserProfileService userProfileService;
+    private final SysLogService sysLogService;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -62,6 +66,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         userRoleService.saveUserRole(sysUser.getUId(), user.getRoleIds());
         // 保存用户个人信息
         userProfileService.saveProfile(sysUser.getUId(), user);
+
+        sysLogService.addLog(LogTypeEnum.USER, sysUser.getUId(), LogRelTypeEnum.USER_CREATE, null);
     }
 
     @Override
@@ -85,6 +91,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
             sysUser.setModifierId(""); // todo 暂时置空
             sysUser.setModifyTime(LocalDateTime.now());
             updateById(sysUser);
+            sysLogService.addLog(LogTypeEnum.USER, userId, LogRelTypeEnum.PWD_UPDATE, null);
             // todo 需要下线所有在线设备
         }
     }
@@ -99,6 +106,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         user.setModifierId(""); // todo 暂时置空
         user.setModifyTime(LocalDateTime.now());
         updateById(user);
+        sysLogService.addLog(LogTypeEnum.USER, userId, LogRelTypeEnum.USER_DELETE, null);
     }
 
     @Override
