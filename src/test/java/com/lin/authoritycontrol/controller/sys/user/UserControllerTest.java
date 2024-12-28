@@ -56,7 +56,7 @@ class UserControllerTest {
         updateForm.setGender(1);
         updateForm.setIdCard("123456789012345678");
         updateForm.setIdCardType("123");
-        form.setRoleIds(Collections.singletonList("123"));
+        updateForm.setRoleIds(Collections.singletonList("123"));
         Result<Void> result2 = userController.updateUser(userId, updateForm);
         RespCheck.checkCode(result2, true);
 
