@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.lin.authoritycontrol.controller.sys.user.form.UserForm;
 import com.lin.authoritycontrol.controller.sys.user.query.UserQuery;
 import com.lin.authoritycontrol.controller.sys.user.vo.UserVO;
-import com.lin.authoritycontrol.mapper.domain.SysUserDO;
+import com.lin.authoritycontrol.mapper.domain.SysUser;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import java.util.List;
  * @author 林维家
  * @since 2024/12/27 下午9:07
  */
-public interface SysUserService extends IService<SysUserDO> {
+public interface SysUserService extends IService<SysUser> {
 
     /**
      * 添加用户

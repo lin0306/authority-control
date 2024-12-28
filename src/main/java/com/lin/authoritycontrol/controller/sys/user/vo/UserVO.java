@@ -1,6 +1,6 @@
 package com.lin.authoritycontrol.controller.sys.user.vo;
 
-import com.lin.authoritycontrol.mapper.domain.SysUserDO;
+import com.lin.authoritycontrol.mapper.domain.SysUser;
 import com.lin.authoritycontrol.util.AESUtil;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,7 +27,7 @@ public class UserVO {
      */
     private String userName;
 
-    public UserVO(SysUserDO sysUserDO) {
+    public UserVO(SysUser sysUserDO) {
         this.uId = sysUserDO.getUId();
         this.userName = AESUtil.decrypt(sysUserDO.getUserName());
     }

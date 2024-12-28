@@ -9,18 +9,20 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * 用户角色
  *
  * @author 林维家
- * @since 2024/12/27 下午9:07
+ * @since 2024/12/28 下午4:29
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName(value = "user_role")
-public class UserRoleDO implements Serializable {
+public class UserRole implements Serializable {
     /**
      * 唯一编码
      */
@@ -38,6 +40,18 @@ public class UserRoleDO implements Serializable {
      */
     @TableField(value = "role_id")
     private String roleId;
+
+    /**
+     * 创建人id
+     */
+    @TableField(value = "creator_id")
+    private String creatorId;
+
+    /**
+     * 创建时间
+     */
+    @TableField(value = "create_time")
+    private LocalDateTime createTime;
 
     private static final long serialVersionUID = 1L;
 }
