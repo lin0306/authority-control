@@ -11,7 +11,7 @@
  Target Server Version : 90100 (9.1.0)
  File Encoding         : 65001
 
- Date: 30/12/2024 17:02:05
+ Date: 30/12/2024 22:25:02
 */
 
 SET NAMES utf8mb4;
@@ -26,7 +26,8 @@ CREATE TABLE `keygen_config`  (
   `api_key` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'api标识',
   `api_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '名称',
   `describe` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL COMMENT '描述',
-  `type` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '秘钥类型',
+  `rel_type` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '业务类型',
+  `key_type` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '秘钥类型',
   `tags` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL COMMENT '标签',
   `private_key` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '私钥',
   `public_key` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '公钥',
@@ -34,6 +35,7 @@ CREATE TABLE `keygen_config`  (
   `start_time` datetime NOT NULL COMMENT '有效期开始时间',
   `end_time` datetime NULL DEFAULT NULL COMMENT '有效期结束时间',
   `enable_flag` tinyint NOT NULL COMMENT '启用标记',
+  `last_generate_time` datetime NOT NULL COMMENT '秘钥最后一次生成时间',
   `creator_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '创建人id',
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `modifier_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '修改人id',

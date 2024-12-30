@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.lin.authoritycontrol.controller.keygen.form.KeygenSaveForm;
+import com.lin.authoritycontrol.controller.keygen.form.KeygenUpdateForm;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -47,10 +49,16 @@ public class KeygenConfig implements Serializable {
     private String describe;
 
     /**
+     * 业务类型
+     */
+    @TableField(value = "`rel_type`")
+    private String relType;
+
+    /**
      * 秘钥类型
      */
-    @TableField(value = "`type`")
-    private String type;
+    @TableField(value = "`key_type`")
+    private String keyType;
 
     /**
      * 标签
@@ -95,6 +103,12 @@ public class KeygenConfig implements Serializable {
     private Boolean enableFlag;
 
     /**
+     * 秘钥最后一次生成时间
+     */
+    @TableField(value = "last_generate_time")
+    private LocalDateTime lastGenerateTime;
+
+    /**
      * 创建人id
      */
     @TableField(value = "creator_id")
@@ -125,4 +139,30 @@ public class KeygenConfig implements Serializable {
     private Boolean deleteFlag;
 
     private static final long serialVersionUID = 1L;
+
+    public KeygenConfig(KeygenSaveForm form) {
+        this.apiKey = form.getApiKey();
+        this.apiName = form.getApiName();
+        this.describe = form.getDescribe();
+        this.relType = form.getRelType();
+        this.keyType = form.getKeyType();
+        this.tags = form.getTags();
+        this.updateFrequency = form.getUpdateFrequency();
+        this.startTime = form.getStartTime();
+        this.endTime = form.getEndTime();
+        this.enableFlag = form.getEnableFlag() != null && form.getEnableFlag(); // 默认为停用
+    }
+
+    public KeygenConfig(KeygenUpdateForm form) {
+        this.apiId = form.getApiId();
+        this.apiKey = form.getApiKey();
+        this.apiName = form.getApiName();
+        this.describe = form.getDescribe();
+        this.relType = form.getRelType();
+        this.tags = form.getTags();
+        this.updateFrequency = form.getUpdateFrequency();
+        this.startTime = form.getStartTime();
+        this.endTime = form.getEndTime();
+        this.enableFlag = form.getEnableFlag() != null && form.getEnableFlag(); // 默认为停用
+    }
 }

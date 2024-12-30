@@ -16,6 +16,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Base64;
 
 /**
  * AES 秘钥工具类
@@ -48,7 +49,7 @@ public class AESKeyUtil {
             saveKeyToFile(key);
         }
         SECRET_KEY = key;
-        log.info("AES 秘钥完成");
+        log.info("AES 秘钥初始化完成");
     }
 
     /**
@@ -56,6 +57,14 @@ public class AESKeyUtil {
      */
     public static SecretKey getSecretKey() {
         return SECRET_KEY;
+    }
+
+    /**
+     * 生成秘钥
+     */
+    public static String genKey() {
+        SecretKey key = generateKey();
+        return Base64.getEncoder().encodeToString(key.getEncoded());
     }
 
     /**
