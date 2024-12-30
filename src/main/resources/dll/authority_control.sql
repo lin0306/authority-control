@@ -11,11 +11,36 @@
  Target Server Version : 90100 (9.1.0)
  File Encoding         : 65001
 
- Date: 28/12/2024 19:48:36
+ Date: 30/12/2024 17:02:05
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for keygen_config
+-- ----------------------------
+DROP TABLE IF EXISTS `keygen_config`;
+CREATE TABLE `keygen_config`  (
+  `api_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '唯一标识',
+  `api_key` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'api标识',
+  `api_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '名称',
+  `describe` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL COMMENT '描述',
+  `type` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '秘钥类型',
+  `tags` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL COMMENT '标签',
+  `private_key` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '私钥',
+  `public_key` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '公钥',
+  `update_frequency` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '更新频率',
+  `start_time` datetime NOT NULL COMMENT '有效期开始时间',
+  `end_time` datetime NULL DEFAULT NULL COMMENT '有效期结束时间',
+  `enable_flag` tinyint NOT NULL COMMENT '启用标记',
+  `creator_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '创建人id',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `modifier_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '修改人id',
+  `modify_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
+  `delete_flag` tinyint NOT NULL DEFAULT 0 COMMENT '删除标记',
+  PRIMARY KEY (`api_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '秘钥配置' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for login_device
