@@ -1,8 +1,10 @@
 package com.lin.authoritycontrol.util;
 
+import cn.hutool.crypto.symmetric.SymmetricAlgorithm;
+import cn.hutool.crypto.symmetric.SymmetricCrypto;
 import com.lin.authoritycontrol.common.exception.CipherException;
 
-import javax.crypto.Cipher;
+import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 /**
@@ -17,9 +19,6 @@ public class AESUtil {
 
     }
 
-    private static final String ALGORITHM = "AES";
-    private static final String CHARSET = "UTF-8";
-
     /**
      * 数据加密
      */
@@ -28,9 +27,12 @@ public class AESUtil {
             return null;
         }
         try {
-            Cipher cipher = Cipher.getInstance(ALGORITHM);
-            cipher.init(Cipher.ENCRYPT_MODE, AESKeyUtil.getSecretKey());
-            byte[] encryptedBytes = cipher.doFinal(plainText.getBytes(CHARSET));
+            SymmetricCrypto aes = new SymmetricCrypto(SymmetricAlgorithm.AES, AESKeyUtil.getSecretKey());
+            //加密
+            byte[] encryptedBytes = aes.encrypt(plainText);
+//            Cipher cipher = Cipher.getInstance(CipherConstant.ALGORITHM_AES_CBC_PKCS5);
+//            cipher.init(Cipher.ENCRYPT_MODE, AESKeyUtil.getSecretKey());
+//            byte[] encryptedBytes = cipher.doFinal(plainText.getBytes(StandardCharsets.UTF_8));
             return Base64.getEncoder().encodeToString(encryptedBytes);
         } catch (Exception e) {
             throw new CipherException("Error encrypting data", e);
@@ -45,17 +47,20 @@ public class AESUtil {
             return null;
         }
         try {
-            Cipher cipher = Cipher.getInstance(ALGORITHM);
-            cipher.init(Cipher.DECRYPT_MODE, AESKeyUtil.getSecretKey());
-            byte[] decodedBytes = Base64.getDecoder().decode(encryptedText);
-            return new String(cipher.doFinal(decodedBytes), CHARSET);
+            SymmetricCrypto aes = new SymmetricCrypto(SymmetricAlgorithm.AES, AESKeyUtil.getSecretKey());
+            //解密
+            byte[] decryptBytes = aes.decrypt(encryptedText);
+//            Cipher cipher = Cipher.getInstance(CipherConstant.ALGORITHM_AES_CBC_PKCS5);
+//            cipher.init(Cipher.DECRYPT_MODE, AESKeyUtil.getSecretKey());
+//            byte[] decodedBytes = Base64.getDecoder().decode(encryptedText);
+            return new String(decryptBytes, StandardCharsets.UTF_8);
         } catch (Exception e) {
             throw new CipherException("Error decrypting data", e);
         }
     }
 
     /**
-     * 字符串转成hash值，用户需要进行模糊搜索参数
+     * 字符串转成hash值，用于需要进行模糊搜索的数据
      */
     public static String hash(String value) {
         if (value == null) {
@@ -77,5 +82,14 @@ public class AESUtil {
      */
     private static String hash(char value) {
         return Integer.toHexString(String.valueOf(value).hashCode());
+    }
+
+    public static void main(String[] args) {
+        String plainText = "123456";
+        String encryptedText = encrypt(plainText);
+        System.out.println("加密后的数据：" + encryptedText);
+        String decryptedText = decrypt(encryptedText);
+        System.out.println("解密后的数据：" + decryptedText);
+        System.out.println("加密再解密后的数据是否一致：" + (plainText.equals(decryptedText)));
     }
 }
